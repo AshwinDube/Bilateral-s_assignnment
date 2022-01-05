@@ -1,0 +1,89 @@
+## Assignmnet submitted by: Ashwin Dubey 
+
+### 1. Importing important Libraries
+
+import os
+import time
+from threading import *
+import shutil
+from threading import Thread
+from time import sleep
+import threading
+
+### 2. Making a file with the name as 'Processing','Queue','Process'
+
+# Creating a folders
+path1='B:\Bilateral files\Processing'
+
+try:
+    os.makedirs(path1)
+    print('folder created')
+
+except FileExistsError:
+    print('File Already exist')
+    
+    
+path2='B:\Bilateral files\Queue'
+try:
+    os.mkdir(path2)
+    print('folder created')
+
+except FileExistsError:
+    print('File Already exist')
+
+path3='B:\Bilateral files\Process'
+try:
+    os.mkdir(path3)
+    print('folder created')
+
+except FileExistsError:
+    print('File Already exist')
+
+### 3. Making a thrade of 3 program running one at a time 
+
+class first(Thread):
+    def run(self):
+        for i in range(10):
+            text=open('B:\\Bilateral files\\Processing\\new.txt','w+')
+            text.close()
+            sleep(2)
+
+class second(Thread):
+    def run(self):
+        #for i in range(10):
+            shutil.move ('B:\\Bilateral files\\Processing\\new.txt','B:\\Bilateral files\\Queue\\new.txt')
+            sleep(0.1)
+        
+
+class third(Thread):
+    def run(self):
+        #for i in range(10):
+            shutil.move ('B:\\Bilateral files\\Queue\\new.txt','B:\\Bilateral files\\Process\\new.txt')
+            sleep(0.1)
+
+        
+f1=first()
+f2=second()
+f3=third()
+
+
+f1.start()
+f1=threading.Timer(1,first)
+sleep(2)
+
+
+f2.start()
+f2=threading.Timer(1,second)
+sleep(2)
+
+
+f3.start()
+f3=threading.Timer(1,third)
+sleep(2) 
+
+
+
+***This program is making a three folder (Processing, Queue, Process). 
+In the Processing folder the 'new.txt' file is creating and and it moving into Queue folder in the given time period. 
+From the Queue folder the 'new.txt' file is moving to Process folder.
+There it is a loop for the text file in processing part but the 'new.txt' file is not furthewr to the Queue folder.***
